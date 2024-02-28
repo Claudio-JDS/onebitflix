@@ -1,4 +1,6 @@
+// import { Sequelize } from 'sequelize'
 import express from 'express'
+import {database} from './database/index'
 
 const app = express()
 
@@ -6,5 +8,9 @@ const app = express()
 const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
+  database.authenticate().then(() => {
+    console.log("Conexão com Banco-Dados foi bem sucedida")
+  })
+
   console.log(`Servidor iniciado com sucesso na porta ${PORT}`)
 })
