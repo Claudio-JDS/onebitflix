@@ -1,16 +1,20 @@
-// import { Sequelize } from 'sequelize'
 import express from 'express'
-import {database} from './database/index'
+import { database } from './database'
+import { adminJs, adminJsRouter } from './adminjs'
 
 const app = express()
 
-//Caso não tenha a porta env.Port vai usar a porta 3000
-const PORT = process.env.PORT || 3000
+app.use(express.static('public'))
 
-app.listen(PORT, () => {
-  database.authenticate().then(() => {
-    console.log("Conexão com Banco-Dados foi bem sucedida")
+app.use(adminJs.options.rootPath, adminJsRouter)
+
+//Caso não tenha a porta env.Port vai usar a porta 3000
+const PORT = process.env.port || 3000
+
+app.listen(PORT, async () => {
+  await database.authenticate().then(() => {
+    console.log('DB connection successfull.')
   })
 
-  console.log(`Servidor iniciado com sucesso na porta ${PORT}`)
+  console.log(`Servidor iniciado com sucesso na porta ${PORT}.`)
 })
