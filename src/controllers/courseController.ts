@@ -72,7 +72,7 @@ export const coursesController = {
 
       const liked = await likeService.isLiked(userId, Number(courseId))
       //Métdo de validação de favorito dando erro
-      /*const favorited = await favoriteService.isFavorited(userId, Number(courseId))*/
+      // const favorited = await favoriteService.isFavorited(userId, Number(courseId))
 
       return res.json({ ...course.get(), /*favorited,*/ liked })
 
