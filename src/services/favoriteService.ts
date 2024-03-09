@@ -48,7 +48,7 @@ export const favoriteService = {
       }
     })
 
-    return favorite !== null
+    return favorite !== null ? true : false
   }
   
 }
